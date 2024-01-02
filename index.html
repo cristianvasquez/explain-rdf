@@ -1,0 +1,300 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <script src="./diff_match_patch.js"></script>
+  <script src="./warp.js"></script>
+
+  <style>
+    #canv {
+      position: absolute;
+      left: 0;
+      top: 0;
+      cursor: none;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    * {
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    svg {
+      /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+      filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <svg id="pointer" width="1000px" height="600px" viewBox="0 0 1000 600" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="pointinghand">
+        <g id="bg-copy" fill="#FFFFFF" opacity="0.00999999978">
+          <rect id="bg" x="0" y="0" width="35" height="35"></rect>
+        </g>
+        <path
+          d="M13.3315,21.3799 C13.0475,21.0209 12.7025,20.2869 12.0885,19.3959 C11.7405,18.8919 10.8775,17.9429 10.6205,17.4609 C10.3975,17.0349 10.4215,16.8439 10.4745,16.4909 C10.5685,15.8629 11.2125,15.3739 11.8995,15.4399 C12.4185,15.4889 12.8585,15.8319 13.2545,16.1559 C13.4935,16.3509 13.7875,16.7299 13.9645,16.9439 C14.1275,17.1399 14.1675,17.2209 14.3415,17.4529 C14.5715,17.7599 14.6435,17.9119 14.5555,17.5739 C14.4845,17.0779 14.3685,16.2309 14.2005,15.4819 C14.0725,14.9139 14.0415,14.8249 13.9195,14.3889 C13.7905,13.9249 13.7245,13.5999 13.6035,13.1079 C13.5195,12.7599 13.3685,12.0489 13.3275,11.6489 C13.2705,11.1019 13.2405,10.2099 13.5915,9.7999 C13.8665,9.4789 14.4975,9.3819 14.8885,9.5799 C15.4005,9.8389 15.6915,10.5829 15.8245,10.8799 C16.0635,11.4139 16.2115,12.0309 16.3405,12.8409 C16.5045,13.8719 16.8065,15.3029 16.8165,15.6039 C16.8405,15.2349 16.7485,14.4579 16.8125,14.1039 C16.8705,13.7829 17.1405,13.4099 17.4785,13.3089 C17.7645,13.2239 18.0995,13.1929 18.3945,13.2539 C18.7075,13.3179 19.0375,13.5419 19.1605,13.7529 C19.5225,14.3769 19.5295,15.6519 19.5445,15.5839 C19.6305,15.2079 19.6155,14.3549 19.8285,13.9999 C19.9685,13.7659 20.3255,13.5549 20.5155,13.5209 C20.8095,13.4689 21.1705,13.4529 21.4795,13.5129 C21.7285,13.5619 22.0655,13.8579 22.1565,13.9999 C22.3745,14.3439 22.4985,15.3169 22.5355,15.6579 C22.5505,15.7989 22.6095,15.2659 22.8285,14.9219 C23.2345,14.2829 24.6715,14.1589 24.7265,15.5609 C24.7515,16.2149 24.7465,16.1849 24.7465,16.6249 C24.7465,17.1419 24.7345,17.4529 24.7065,17.8269 C24.6755,18.2269 24.5895,19.1309 24.4645,19.5689 C24.3785,19.8699 24.0935,20.5469 23.8125,20.9529 C23.8125,20.9529 22.7385,22.2029 22.6215,22.7659 C22.5035,23.3279 22.5425,23.3319 22.5195,23.7309 C22.4965,24.1289 22.6405,24.6529 22.6405,24.6529 C22.6405,24.6529 21.8385,24.7569 21.4065,24.6879 C21.0155,24.6249 20.5315,23.8469 20.4065,23.6089 C20.2345,23.2809 19.8675,23.3439 19.7245,23.5859 C19.4995,23.9689 19.0155,24.6559 18.6735,24.6989 C18.0055,24.7829 16.6195,24.7299 15.5345,24.7189 C15.5345,24.7189 15.7195,23.7079 15.3075,23.3609 C15.0025,23.1019 14.4775,22.5769 14.1635,22.3009 L13.3315,21.3799 Z"
+          id="hand" fill="#FFFFFF"></path>
+        <path
+          d="M13.3315,21.3799 C13.0475,21.0209 12.7025,20.2869 12.0885,19.3959 C11.7405,18.8919 10.8775,17.9429 10.6205,17.4609 C10.3975,17.0349 10.4215,16.8439 10.4745,16.4909 C10.5685,15.8629 11.2125,15.3739 11.8995,15.4399 C12.4185,15.4889 12.8585,15.8319 13.2545,16.1559 C13.4935,16.3509 13.7875,16.7299 13.9645,16.9439 C14.1275,17.1399 14.1675,17.2209 14.3415,17.4529 C14.5715,17.7599 14.6435,17.9119 14.5555,17.5739 C14.4845,17.0779 14.3685,16.2309 14.2005,15.4819 C14.0725,14.9139 14.0415,14.8249 13.9195,14.3889 C13.7905,13.9249 13.7245,13.5999 13.6035,13.1079 C13.5195,12.7599 13.3685,12.0489 13.3275,11.6489 C13.2705,11.1019 13.2405,10.2099 13.5915,9.7999 C13.8665,9.4789 14.4975,9.3819 14.8885,9.5799 C15.4005,9.8389 15.6915,10.5829 15.8245,10.8799 C16.0635,11.4139 16.2115,12.0309 16.3405,12.8409 C16.5045,13.8719 16.8065,15.3029 16.8165,15.6039 C16.8405,15.2349 16.7485,14.4579 16.8125,14.1039 C16.8705,13.7829 17.1405,13.4099 17.4785,13.3089 C17.7645,13.2239 18.0995,13.1929 18.3945,13.2539 C18.7075,13.3179 19.0375,13.5419 19.1605,13.7529 C19.5225,14.3769 19.5295,15.6519 19.5445,15.5839 C19.6305,15.2079 19.6155,14.3549 19.8285,13.9999 C19.9685,13.7659 20.3255,13.5549 20.5155,13.5209 C20.8095,13.4689 21.1705,13.4529 21.4795,13.5129 C21.7285,13.5619 22.0655,13.8579 22.1565,13.9999 C22.3745,14.3439 22.4985,15.3169 22.5355,15.6579 C22.5505,15.7989 22.6095,15.2659 22.8285,14.9219 C23.2345,14.2829 24.6715,14.1589 24.7265,15.5609 C24.7515,16.2149 24.7465,16.1849 24.7465,16.6249 C24.7465,17.1419 24.7345,17.4529 24.7065,17.8269 C24.6755,18.2269 24.5895,19.1309 24.4645,19.5689 C24.3785,19.8699 24.0935,20.5469 23.8125,20.9529 C23.8125,20.9529 22.7385,22.2029 22.6215,22.7659 C22.5035,23.3279 22.5425,23.3319 22.5195,23.7309 C22.4965,24.1289 22.6405,24.6529 22.6405,24.6529 C22.6405,24.6529 21.8385,24.7569 21.4065,24.6879 C21.0155,24.6249 20.5315,23.8469 20.4065,23.6089 C20.2345,23.2809 19.8675,23.3439 19.7245,23.5859 C19.4995,23.9689 19.0155,24.6559 18.6735,24.6989 C18.0055,24.7829 16.6195,24.7299 15.5345,24.7189 C15.5345,24.7189 15.7195,23.7079 15.3075,23.3609 C15.0025,23.1019 14.4775,22.5769 14.1635,22.3009 L13.3315,21.3799 L13.3315,21.3799 Z"
+          id="hand-border" stroke="#000000" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M21.5664,21.7344 L21.5664,18.2754" id="line3" stroke="#000000" stroke-width="0.75"
+          stroke-linecap="round"></path>
+        <path d="M19.5508,21.7461 L19.5348,18.2731" id="line2" stroke="#000000" stroke-width="0.75"
+          stroke-linecap="round"></path>
+        <path d="M17.5547,18.3047 L17.5757,21.7307" id="line1" stroke="#000000" stroke-width="0.75"
+          stroke-linecap="round"></path>
+      </g>
+    </g>
+  </svg>
+
+  <script>
+    // mainText: source text (what shows up on the screen initially)
+    // shadowText: target text (what the source text animates into when you pointerdown)
+    const mainText = '\n' +
+      '    (Chocolate Chip Cookies, name, "Chocolate Chip Cookies")\n' +
+      '    (Chocolate Chip Cookies, author, John Doe)\n' +
+      '    (Chocolate Chip Cookies, prepTime, "15 minutes")\n' +
+      '    (Chocolate Chip Cookies, cookTime, "10 minutes")\n' +
+      '    (Chocolate Chip Cookies, ingredients, "flour, sugar, chocolate chips")\n'
+    const shadowText = '@prefix ex: <http://example.org/> .\n' +
+      '\n' +
+      'ex:chocolate-chip-cookie ex:name "Chocolate Chip Cookies" ;\n' +
+      '\tex:author "John Doe" ;\n' +
+      '\tex:prepTime "15 minutes" ;\n' +
+      '\tex:cookTime "10 minutes" ;\n' +
+      '\tex:ingredients "flour, sugar, chocolate chips" .' +
+      ''
+
+    const pointerScale = 4;
+
+    const mainChars = mainText.split('').map(c => ({ c, x: 0, y: 0 }));
+    const shadowChars = shadowText.split('').map(c => ({ c, x: 0, y: 0 }));
+
+    const diffs = (function () {
+      const differ = new diff_match_patch();
+      const diffs = differ.diff_main(mainText, shadowText);
+      // cleanupSemantic tries to chunk together diffs -- may be
+      // better if you don't want to have individual characters
+      // reused, for instance:
+      // differ.diff_cleanupSemantic(diffs);
+      return diffs;
+    })();
+
+    const canvas = (function () {
+      try { document.getElementById('canv').remove(); } catch (e) { }
+      document.body.insertAdjacentHTML('afterbegin', `<canvas width="1000" height="600" id="canv"></canvas>`);
+      return document.getElementById('canv');
+    })();
+
+    const Renderer = (function () {
+      function setDPI(canvas, dpi) {
+        // Set up CSS size.
+        canvas.style.width = canvas.style.width || canvas.width + 'px';
+        canvas.style.height = canvas.style.height || canvas.height + 'px';
+
+        // Resize canvas and scale future draws.
+        var scaleFactor = dpi / 96;
+        canvas.width = Math.ceil(canvas.width * scaleFactor);
+        canvas.height = Math.ceil(canvas.height * scaleFactor);
+        var ctx = canvas.getContext('2d');
+        ctx.scale(scaleFactor, scaleFactor);
+      }
+      setDPI(canvas, 192);
+
+      const ctx = canvas.getContext('2d');
+      ctx.textBaseline = 'top';
+      ctx.font = '1em Operator Mono SSm, monospace';
+      const metrics = ctx.measureText('m');
+      const lineHeight = metrics.actualBoundingBoxDescent * 1.4;
+
+      return {
+        computePositions(chars) {
+          let { x, y } = chars[0];
+          for (let char of chars) {
+            char.x = x; char.y = y;
+            if (char.c === '\n' || char.x > 700) {
+              x = 0;
+              y += lineHeight;
+            } else {
+              x += metrics.width;
+            }
+          }
+        },
+        charIndexUnder(x, y) {
+          for (let [i, char] of mainChars.entries()) {
+            if (char.x < x && char.y < y &&
+              x <= char.x + metrics.width &&
+              y <= char.y + lineHeight) {
+              return i;
+            }
+          }
+        },
+        clear() { ctx.clearRect(0, 0, 1000, 600); },
+        render(chars, startIdx = 0, endIdx = chars.length - 1) {
+          for (let i = startIdx; i <= endIdx; i++) {
+            const char = chars[i];
+            const x = "animX" in char ? char.animX : char.x;
+            const y = "animY" in char ? char.animY : char.y;
+            if (char.bgStyle) {
+              ctx.save();
+              ctx.fillStyle = char.bgStyle;
+              ctx.fillRect(x, y, metrics.width, lineHeight);
+              ctx.restore();
+            }
+            ctx.fillStyle = char.fillStyle || 'black';
+            ctx.fillText(char.c, x, y);
+          }
+        },
+        ctx
+      };
+    })();
+
+    const Animator = (function () {
+      const renderFrame = (function () {
+        function easeInOutCubic(x) {
+          return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        }
+
+        function animate(x0, x1, t, ease = easeInOutCubic) {
+          return x0 * (1 - ease(t)) + x1 * ease(t);
+        }
+
+        return function renderFrame(t) {
+          for (let char of mainChars) {
+            if ('shadowIndex' in char) {
+              const shadowChar = shadowChars[char.shadowIndex];
+              char.animX = animate(char.x, shadowChar.x, t);
+              char.animY = animate(char.y, shadowChar.y, t);
+            } else {
+              char.fillStyle = `rgba(0, 0, 0, ${animate(1, 0, t)})`;
+            }
+          }
+
+          rewarpPointer();
+
+          Renderer.clear();
+          Renderer.render(mainChars);
+
+          for (let createChars of createCharRuns) {
+            createChars.forEach(char => {
+              char.fillStyle = `rgba(0, 0, 0, ${animate(0, 1, t)})`;
+            });
+            Renderer.render(createChars);
+          }
+        };
+      })();
+
+      let target = 0, rate, slowMode;
+
+      let t = 0;
+      requestAnimationFrame(timestamp => {
+        (function frame(prevTimestamp, timestamp) {
+          if (Math.abs(target - t) > 0.01) {
+            t += (target - t) / (timestamp - prevTimestamp) * (slowMode ? (rate / 4) : rate);
+            renderFrame(t);
+          } else {
+            // FIXME: stop animation
+          }
+
+          requestAnimationFrame(newTimestamp => frame(timestamp, newTimestamp));
+        })(timestamp - 20, timestamp)
+      });
+
+      return {
+        get target() { return target; },
+        set target(t) {
+          target = t;
+          // FIXME: dynamically restart animation once we're stopping it above
+        },
+        get rate() { return rate; },
+        set rate(s) { rate = s; },
+        get slowMode() { return slowMode; },
+        set slowMode(sm) { slowMode = sm; }
+      };
+    })();
+
+    Renderer.computePositions(mainChars);
+    Renderer.render(mainChars);
+
+    // creation of createCharRuns (later) requires that we compute
+    // positions for shadowChars beforehand.
+    Renderer.computePositions(shadowChars);
+
+    const createCharRuns = [];
+    (function () { // walk the diffs to construct a mapping mainChars -> shadowChars
+      let i = 0, shadowI = 0;
+      for (let { 0: kind, 1: text } of diffs) {
+        if (kind === 0) { // this run of mainText is preserved in shadowText
+          let textEnd = i + text.length;
+          while (i < textEnd) {
+            mainChars[i].shadowIndex = shadowI;
+            i++; shadowI++;
+          }
+
+        } else if (kind === -1) { // this run of mainText is removed in shadowText
+          let textEnd = i + text.length;
+          while (i < textEnd) {
+            i++;
+          }
+
+        } else if (kind === 1) { // this run is _created_ in shadowText
+          const createChars = [];
+          let textEnd = shadowI + text.length;
+          while (shadowI < textEnd) {
+            // uses (depends on) computed position from shadowChar
+            createChars.push({ ...shadowChars[shadowI] })
+            shadowI++;
+          }
+          createCharRuns.push(createChars);
+        }
+      }
+    })();
+
+    let pointerX, pointerY;
+    const pointer = document.getElementById('pointer');
+    const pointerPointer = document.getElementById('pointinghand');
+    const warpPointer = new Warp(pointer);
+    warpPointer.interpolate(4);
+    warpPointer.transform(([x, y]) => {
+      return [(x - 10) * pointerScale, (y - 10) * pointerScale, (x - 10) * pointerScale, (y - 10) * pointerScale];
+    });
+    function rewarpPointer() {
+      warpPointer.transform(([x, y, ox, oy]) => {
+        const idx = Renderer.charIndexUnder(pointerX + ox, pointerY + oy);
+        const char = mainChars[idx];
+        if (!char) return [x, y, ox, oy];
+        const animX = ('animX' in char ? char.animX : char.x);
+        const animY = ('animY' in char ? char.animY : char.y);
+        return [ox + (animX - char.x), oy + (animY - char.y), ox, oy];
+      });
+    }
+
+    canvas.onpointermove = function (e) {
+      pointerX = e.offsetX; pointerY = e.offsetY;
+      pointerPointer.style.transform = `translate(${pointerX}px, ${pointerY}px)`;
+
+      const charIdx = Renderer.charIndexUnder(pointerX, pointerY);
+      const char = mainChars[charIdx];
+      if (!char) { document.body.style.cursor = 'auto'; return; }
+
+      document.body.style.cursor = 'pointer';
+      rewarpPointer();
+    };
+    canvas.onpointerdown = function (e) { Animator.target = 1; Animator.rate = 1; };
+    canvas.onpointerup = function (e) { Animator.target = 0; Animator.rate = 2; };
+    document.onkeydown = document.onkeyup = function (e) { Animator.slowMode = e.shiftKey; }
+  </script>
+</body>
+
+</html>
