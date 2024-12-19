@@ -59,22 +59,78 @@
 <script type="module">
   import { diff_match_patch } from './src/diff_match_patch.js'
   import Warp from 'warpjs'
-  // mainText: source text (what shows up on the screen initially)
-  // shadowText: target text (what the source text animates into when you pointerdown)
-  const mainText = '\n' +
-    '    (Chocolate Chip Cookies, name, "Chocolate Chip Cookies")\n' +
-    '    (Chocolate Chip Cookies, author, John Doe)\n' +
-    '    (Chocolate Chip Cookies, prepTime, "15 minutes")\n' +
-    '    (Chocolate Chip Cookies, cookTime, "10 minutes")\n' +
-    '    (Chocolate Chip Cookies, ingredients, "flour, sugar, chocolate chips")\n'
-  const shadowText = '@prefix ex: <http://example.org/> .\n' +
-    '\n' +
-    'ex:chocolate-chip-cookie ex:name "Chocolate Chip Cookies" ;\n' +
-    '\tex:author "John Doe" ;\n' +
-    '\tex:prepTime "15 minutes" ;\n' +
-    '\tex:cookTime "10 minutes" ;\n' +
-    '\tex:ingredients "flour, sugar, chocolate chips" .' +
-    ''
+
+  const mainText = `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe: Chocolate Chip Cookies</title>
+</head>
+<body>
+  <h1>Chocolate Chip Cookies</h1>
+
+  <!-- Using data attributes for JSON-LD in HTML -->
+  <div itemscope itemtype="http://schema.org/Recipe">
+    <span itemprop="name">Chocolate Chip Cookies</span>
+    <span itemprop="author">John Doe</span>
+    <meta itemprop="prepTime" content="PT15M">
+    <meta itemprop="cookTime" content="PT10M">
+
+    <div>
+      <h2>Ingredients</h2>
+      <ul>
+        <li itemprop="recipeIngredient">flour</li>
+        <li itemprop="recipeIngredient">sugar</li>
+        <li itemprop="recipeIngredient">chocolate chips</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Instructions</h2>
+      <ol>
+        <li itemprop="recipeInstructions">Preheat the oven to 350°F.</li>
+        <li itemprop="recipeInstructions">Mix the dry ingredients.</li>
+        <li itemprop="recipeInstructions">Add the chocolate chips.</li>
+        <li itemprop="recipeInstructions">Bake for 10 minutes.</li>
+      </ol>
+    </div>
+  </div>
+
+  <footer>
+    <span>Recipe by <span itemprop="author">John Doe</span></span>
+  </footer>
+</body>
+</html>
+`;
+
+  const shadowText = `
+@prefix schema: <http://schema.org/> .
+
+<http://example.org/chocolate-chip-cookie>
+  a schema:Recipe ;
+  schema:name "Chocolate Chip Cookies" ;
+  schema:author "John Doe" ;
+  schema:prepTime "PT15M" ;
+  schema:cookTime "PT10M" ;
+  schema:recipeIngredient "flour", "sugar", "chocolate chips" ;
+  schema:recipeInstructions "Preheat the oven to 350°F.", "Mix the dry ingredients.", "Add the chocolate chips.", "Bake for 10 minutes." .
+`;
+
+  //
+  // const mainText = '\n' +
+  //   '    (Chocolate Chip Cookies, name, "Chocolate Chip Cookies")\n' +
+  //   '    (Chocolate Chip Cookies, author, John Doe)\n' +
+  //   '    (Chocolate Chip Cookies, prepTime, "15 minutes")\n' +
+  //   '    (Chocolate Chip Cookies, cookTime, "10 minutes")\n' +
+  //   '    (Chocolate Chip Cookies, ingredients, "flour, sugar, chocolate chips")\n'
+  // const shadowText = '@prefix ex: <http://example.org/> .\n' +
+  //   '\n' +
+  //   'ex:chocolate-chip-cookie ex:name "Chocolate Chip Cookies" ;\n' +
+  //   '\tex:author "John Doe" ;\n' +
+  //   '\tex:prepTime "15 minutes" ;\n' +
+  //   '\tex:cookTime "10 minutes" ;\n' +
+  //   '\tex:ingredients "flour, sugar, chocolate chips" .' +
+  //   ''
 
   const pointerScale = 4
 
