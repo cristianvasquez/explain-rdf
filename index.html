@@ -2,9 +2,6 @@
 
 <head>
     <meta charset="utf-8"/>
-
-    <script src="./src/diff_match_patch.js"></script>
-
     <style>
         #canv {
             position: absolute;
@@ -58,7 +55,9 @@
     </g>
 </svg>
 
+
 <script type="module">
+  import { diff_match_patch } from './src/diff_match_patch.js'
   import Warp from 'warpjs'
   // mainText: source text (what shows up on the screen initially)
   // shadowText: target text (what the source text animates into when you pointerdown)
