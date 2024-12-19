@@ -58,7 +58,7 @@
 
 <script type="module">
   import { diff_match_patch } from './src/diff_match_patch.js'
-  import Warp from 'warpjs'
+  import { Warp } from './src/warp.js'
 
   const mainText = `
 <!DOCTYPE html>
@@ -101,7 +101,7 @@
   </footer>
 </body>
 </html>
-`;
+`
 
   const shadowText = `
 @prefix schema: <http://schema.org/> .
@@ -114,7 +114,7 @@
   schema:cookTime "PT10M" ;
   schema:recipeIngredient "flour", "sugar", "chocolate chips" ;
   schema:recipeInstructions "Preheat the oven to 350°F.", "Mix the dry ingredients.", "Add the chocolate chips.", "Bake for 10 minutes." .
-`;
+`
 
   //
   // const mainText = '\n' +
